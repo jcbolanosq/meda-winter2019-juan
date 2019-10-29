@@ -1,26 +1,41 @@
-
 var fs = require("fs");
 
-var html3 = ` 
+var doubleQuotes = "this is a string";
+var singleQuotes = 'this is a string';
+var stringLiterals = `this 
+is
+a 
+string`;
+
+var html = 
+"<html>" +
+"<head>" +
+"<style></style>" +
+"</head>" +
+"<body></body>" +
+"</html>";
+
+var html2 = "<html><head><style></style></head><body></body></html>";
+
+var html3 = `
 <html>
     <head>
-        <stlyle></stlyle>
+        <style></style>
     </head>
-    
+
     <body>
     </body>
-</html> `;
+</html>
+`;
 
+// Update this script to write the text of html3 to a file called sample.html.
 
-// Write files, will overwrite existing filenames.
 fs.writeFileSync("sample.html", html3, "utf8");
 
 
-var textReadFromFile = fs.readFileSync("sample.html", "utf8");
+var sum = 100 * 7;
 
-console.log(textReadFromFile);
-
-
+var sum2 = 100 * 8;
 
 
 
