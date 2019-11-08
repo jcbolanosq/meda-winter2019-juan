@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--google cdn jquery-->
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+              crossorigin="anonymous">
+    </script>
+
+    <style>
+        body {
+            background-color:rgb(67, 126, 18);
+        }
+    </style>
+</head>
+<body>
+    <p><h1>I live!</h1></p>
+    <script>
+        $(document).ready(() => {
+
+            let data = {message: "hello there!"};
+            
+            // Sends a post request to the URL describe. Arguments in order: URL, dat, callback Function.
+            $.post("http://localhost:3000/updateData", data, (dataFromServer) => {
+                console.log("The Server has responded!");
+                console.log(dataFromServer);
+            });
+
+        });
+    </script>
+</body>
+</html>
