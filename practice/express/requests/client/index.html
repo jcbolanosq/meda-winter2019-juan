@@ -12,22 +12,81 @@
 
     <style>
         body {
-            background-color:rgb(67, 126, 18);
+            background-color:rgb(224, 220, 165);
         }
     </style>
 </head>
 <body>
-    <p><h1>I live!</h1></p>
+
+    <div id="comments-section">
+        <h1>Comments Section</h1>
+        <ul id="comments"></ul>
+    </div>
+
+    <div id="comment-submission">
+    <h1>Comment Submission Form</h1>
+    <h2>Form</h2>
+    <ol>
+        <li>Fill in the form</li>
+        <li>Press the Submit button</li>
+    </ol>
+
+    <form>
+        <label for="fname">First Name</label><br />
+        <input name="fname" id="fname" type="text" /><br />
+        <label for="lname">Last Name</label><br />
+        <input name="lname" id="lname" type="text" /><br />
+        <label for="email">Email</label><br />
+        <input name="email" id="email" type="text" /><br />
+        <label for="age">Age</label><br />
+        <input name="age" id="age" type="number" /><br />
+
+        <label for="comment">Your Comment</label><br />
+        <textarea cols="40" rows="10" id="comment"></textarea><br />
+    </form>
+    
+    <input form="commentSubmission" type="reset" value="Reset" />
+    <button id="submit">Submit</button>
+    </div>
     <script>
         $(document).ready(() => {
 
-            let data = {message: "hello there!"};
+            $("#submit").click(() => {
+                // This listen to the submit button, and the user presses on it confirm to submit to the server.
+
+
+                // Add timesramp in the furure by using;
+                // Date.prototype.toLocaleDateString();
+
+                let data = {
+                    firstName: $("#fname").val(),
+                    lasttName: $("#lname").val(),
+                    email: $("#email").val(),
+                    age: $("#age").val(),
+                    message: $("#comment").val()
+                };
             
             // Sends a post request to the URL describe. Arguments in order: URL, dat, callback Function.
-            $.post("http://localhost:3000/updateData", data, (dataFromServer) => {
-                console.log("The Server has responded!");
-                console.log(dataFromServer);
+            $.post("http://localhost:3000/submitComment", data, () => {
+                console.log("The Server has responded !");
             });
+
+            $.post("http://localhost:3000/loadComments", {}, (commentsReceived) => {
+                // console.log(commentsReceived.commentsArray[1].firstName);
+
+                let cArray = commentsReceived.commentsArray;
+                for (let i=0;i< cArray.length;i++) {
+                   let commentString = "<li>"+cArray[i].message + " - " + cArray[i].firstName + "</li>";
+
+                    $("#comments").append(commentString);
+                }
+
+            });
+
+
+
+            });
+
 
         });
     </script>
